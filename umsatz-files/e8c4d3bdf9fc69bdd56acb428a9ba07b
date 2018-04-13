@@ -1,0 +1,36 @@
+#!/bin/perl -w
+use strict;
+use warnings;
+
+use IO::Interactive qw(is_interactive);
+
+print "HELLO!\n";
+
+my $file="ausgabe.txt";
+my $out;
+open($out,">",$file) or die "Fehler beim Öffnen von $file: $!\n";
+
+for (my $i=1; $i <= 10; $i+=1) {
+	print $out "$i. Zeile\n";
+}
+close($out);
+
+print "Von Datei lesen:\n";
+my $in;
+open($in,"<",$file . "x") or die "Fehler beim Öffnen von $file zum Lesen: $!\n";
+
+while (<$in>) {
+	chomp($_);
+	print "Ausgabe: $_\n";
+}
+
+close($in);
+
+my ($answer, $rest);
+print "Löschen j/n?: ";
+$answer = getc;
+$rest = <STDIN>;
+
+print "$answer\n";
+print "Rest: $rest\n";
+prompt "Mario:";

@@ -1,5 +1,5 @@
 var express = require('express');
-//var db = require('./models/db');
+var db = require('./models/db');
 const bodyParser = require('body-parser');
 
 var app = express();
@@ -10,10 +10,10 @@ app.set('views','./views');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended : true }));
 
-//require('./controllers/routes.js')(app);
+require('./controllers/routes.js')(app);
 
 
-var server = app.listen(8081, function () {
+var server = app.listen(8080, function () {
    var host = server.address().address
    var port = server.address().port
    

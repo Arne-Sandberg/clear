@@ -1,0 +1,19 @@
+#!/bin/perl -w
+use strict;
+use warnings;
+
+use DBI;
+
+my @treiber = DBI->available_drivers() or die ("Keine DB Treiber installiert.");
+
+foreach my $tr(@treiber) {
+	print "$tr\n";
+}
+
+my $dbh = DBI->connect("DBI:SQLite:dbname=kassadb","","");
+
+my $sth = $dbh->prepare("select * from test");
+$sth->execute();
+while (my @row = $sth->fetchrow_array) {
+	print "Feld1: $row[0]   Feld2: $row[1]\n";
+}
